@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <title>Unión Mediterránea - Taekwondo IFT</title>
+    <link rel="shortcut icon" href="../assets/union.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../styles/style.css">
+    <link rel="stylesheet" href="../styles/footer.css">
+    <link rel="stylesheet" href="../styles/menu.css">
+    <link rel="stylesheet" href="../styles/modal_conf.css">
+    <link rel="stylesheet" href="../styles/ABM_publicaciones.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    
+</head>
+<style>
+        /* Estilo para la tabla */
+        .table-container {
+    overflow-x: auto;
+    margin: 20px 0;
+}
+
+.table {
+width: 100%;
+border-collapse: collapse;
+}
+
+.table th, .table td {
+text-align: left;
+padding: 12px;
+border-bottom: 1px solid #ddd;
+}
+
+.table th {
+background-color: #323232;
+color: white;
+text-align: center;
+}
+
+.table td{
+    text-align: center;
+}
+.table-striped tbody tr:nth-child(even) {
+background-color: #63666B !important; /* Color de fondo alterno */
+}
+
+.table tbody tr:hover {
+background-color: #e0e0e0; /* Color al pasar el ratón */
+}
+.icon-download {
+    color: rgba(0, 191, 255, 0.664);
+    cursor: pointer; /* Cambia el cursor al pasar el ratón */
+    font-size: 25px;
+    padding: 0 3px;
+}
+
+.icon-download-disabled {
+    color: #63666B;
+    cursor: not-allowed; /* Cambia el cursor para indicar que no se puede hacer clic */
+    font-size: 25px;
+    padding: 0 3px;
+}
+
+.icon-ban {
+    color: #f36b2b;
+    cursor: pointer;
+    font-size: 25px;
+    padding: 0 3px;
+}
+
+.icon-add {
+    color: rgba(0, 128, 0, 0.664);
+    cursor: pointer;
+    font-size: 25px;
+    padding: 0 3px;
+}
+select {
+    width: 100%;
+  padding: 16px;
+  background-color: #d5d7d8;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+select:focus {
+    border-color: #f36b2b;
+}
+
+select option {
+    color: #63666B; /* Ajusta el color de las opciones dentro del select */
+}   
+.img-circular-container {
+    display: flex;
+    justify-content: center; /* Centra la imagen horizontalmente */
+    margin-top: 10px; /* Espacio entre el input y la imagen */
+}
+
+.img-circular {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    object-fit: contain; /* Alternativa para mostrar toda la imagen */
+    background-color: #63666B;; /* Fondo para identificar espacios vacíos */
+    border: 2px solid #ccc;
+}
+
+
+.container {
+    text-align: center;
+    max-width: 1500px;
+    padding: 50px;
+    border-radius: 30px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+    margin: 150px auto;
+    flex: 1;
+}
+
+.search-filters {
+    background-color: #63666B;
+    padding: 20px;
+    border-radius: 20px;
+    margin: 0 auto;
+    height: auto;  /* Ajusta la altura automáticamente */
+    align-content: center;
+}
+
+.filter-row {
+    display: flex;
+    justify-content: flex-end;  /* Cambiado a 'flex-start' para alinear a la izquierda */
+    padding-bottom: 15px;
+    margin: 15px;
+}
+
+.filter-group {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.filter-group:last-child {
+    margin-right: 0;
+}
+
+label {
+    display: block;
+    color: #fff;
+    margin-bottom: 5px;
+    text-align: initial;
+}
+
+input[type="text"],
+select {
+    width: 100%;
+    padding: 16px;
+    background-color: #d5d7d8;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+input[type="text"]:focus,
+select:focus {
+    outline: none;
+}
+
+.search-button {
+    background-color: #323232;
+    color: white;
+    padding: 15px 50px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    text-align: center;
+    display: block;
+}
+
+.search-button:hover {
+    background-color: #f36a2bc2;
+}
+
+
+h2, h3{
+    margin: 30px;
+    margin-bottom: 30px;
+    font-size: 40px;
+    text-align: left;
+    margin-bottom: 50px;
+}
+h3{
+    color: #D2D2D2;
+}
+.icon-delete {
+    color: #f36b2b;
+    cursor: pointer;
+    font-size: 25px;
+    padding: 0 3px;
+}
+@media (max-width: 768px) {
+
+    .container{
+        text-align: center;
+        
+        padding: 15px;
+        border-radius: none;
+        box-shadow: none;
+        margin: 50px auto;
+        flex: 1;
+
+    }
+    .img-circular {
+        width: 200px;
+        height: 200px;
+    }
+    .modal-footer-custom{
+        display: block;
+        margin: auto;
+    }
+    .btn{
+        width: 100%;
+        margin-left: 0px !important;
+        margin-bottom: 10px;
+    }
+    .modal-header-custom h5 {
+        font-size: 25px;
+    }
+}
+
+
+</style>
+<body>
+    <header class="navbar">
+        <div class="navbar-left">
+            <a href="../Index.html">
+                <img src="../assets/log4.png" alt="Logo" class="navbar-logo">
+                <h1 class="navbar-title">UNION MEDITERRANEA</h1>
+            </a>
+        </div>
+        <nav class="navbar-menu" id="navbar-menu">
+            <ul>
+                <img src="../assets/log1.png" alt="Logo" class="navbar-logo-U">
+                <li><a href="publicaciones.html">Publicaciones</a></li>
+
+                <li><a href="ABM_alumnos.html">Mis alumnos</a></li> 
+                <li><a id="actual" href="ABM_escuelas.html">Mi escuela</a></li>
+                <li><a href="mi-perfil.html">Mi perfil</a></li>
+                <li><a href="../src/login.html" class="login-btn" onclick="cerrarSesion()">Cerrar Sesión</a></li>
+            </ul>
+        </nav>
+        <i class="fas fa-bars hamburger" id="hamburger"></i>
+    </header>       
+    <!-- Loader -->
+    <!-- <div id="loader" class="loader-container">
+        <div class="loader"></div>
+    </div> -->
+    <div class="alert-container">
+        <div id="alert-aviso" class="alert alert-aviso">            
+        </div>
+        <div id="alert-success" class="alert alert-success">            
+        </div>
+        <div id="alert-error" class="alert alert-danger">
+        </div>
+    </div>
+    
+    <main class="container">
+        <h2>Escuela</h2>
+        <button class="new-publication" id="openModalButton">Mi Escuela</button>
+    
+        <!-- Modal personalizado -->
+        <div id="newPublicationModal" class="custom-modal">
+            <div class="modal-content-custom">
+                <div class="modal-header-custom">
+                    <h5 class="modal-title">Crear nueva escuela</h5>
+                    <button class="btn-close-custom" id="closeModalButton">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form id="publicationForm">
+                        <!-- Campo para el logo de la escuela con vista previa -->
+                        <div class="mb-3 img-circular-container">
+                            <img id="imagePreview" src="" alt="Vista previa" class="img-circular">
+                        </div>
+    
+                        <!-- Campo para el nombre de la escuela -->
+                        <div class="mb-3">
+                            <label for="titulo" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="titulo" name="titulo" required>
+                        </div>
+    
+                        <!-- Campo para el logo de la escuela -->
+                        <div class="mb-3">
+                            <label for="imagen" class="form-label">Logo de la escuela</label>
+                            <input type="file" class="form-control" id="imagen" name="imagen" accept="image/*" onchange="previewImage(event)">
+                        </div>
+    
+                        <!-- Campo para el email -->
+                        <div class="mb-3">
+                            <label for="descripcion" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="descripcion" name="descripcion" required>
+                        </div>
+    
+                        <!-- Campo para el teléfono -->
+                        <div class="mb-3">
+                            <label for="telefono" class="form-label">Teléfono</label>
+                            <input type="tel" class="form-control" id="telefono" name="telefono" required>
+                        </div>
+    
+                        <!-- Campo para el enlace de Instagram -->
+                        <div class="mb-3">
+                            <label for="enlaceInstagram" class="form-label">Enlace</label>
+                            <input type="text" class="form-control" id="enlaceInstagram" name="enlaceInstagram" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer-custom">
+                    <button type="button" class="btn btn-cancelar" id="closeModalButtonFooter">Cerrar</button>
+                    <button type="button" class="btn btn-guardar" id="btnGuardar">Guardar</button>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Modal de Confirmación -->
+        <div id="confirmModal" class="confirmacion-modal">
+            <div class="modal-content-confirmacion">
+                <div class="modal-header-confirmacion">
+                    <h5 class="modal-title">Confirmación</h5>
+                    <button class="btn-close-confirmacion" id="closeConfirmModal">&times;</button>
+                </div>
+                <div class="confirmacion-modal-body">
+                    <p id="confirmMessage">¿Estás seguro de realizar esta acción?</p>
+                </div>
+                <div class="modal-footer-confirmacion">
+                    <button type="button" class="btn btn-cancelar" id="cancelConfirmButton">Cancelar</button>
+                    <button type="button" class="btn btn-confirmar" id="confirmActionButton">Confirmar</button>
+                </div>
+            </div>
+        </div>
+
+       
+        <!-- Formulario reorganizado para crear sedes manteniendo las clases -->
+        <section class="search-filters">
+            <h3>Sedes</h3>
+            <form action="#" method="POST" id="create-sede-form" novalidate>
+                <div class="filter-row">
+                    <div class="filter-group">
+
+                        <label for="direccion">Dirección *</label>
+                        <input type="text" id="direccion" name="direccion" placeholder="Ingresa la dirección" required />
+                    </div>
+        
+                    <!--<div class="filter-group">
+                        <label for="descripcion">Descripción*</label>
+                        <input type="text" id="descripcion" name="descripcion" placeholder="Ingresa la descripción" required />
+                    </div>-->
+                </div>
+        
+                <div class="filter-row">
+                    <div class="filter-group">
+
+                        <label for="provincia">Provincia *</label>
+
+                        <select id="provincia" name="provincia" required>
+                            <option value="">Selecciona</option>
+                            <!-- Opciones dinámicas de provincias -->
+                        </select>
+                    </div>
+        
+                    <div class="filter-group">
+                        <label for="localidad">Localidad *</label>
+
+                        <select id="localidad" name="localidad" required>
+                            <option value="">Selecciona</option>
+                            <!-- Opciones dinámicas de localidades -->
+                        </select>
+                    </div>
+                </div>
+        
+                <div class="filter-row">
+                    <button type="button" id="add-sede-button" class="search-button">Añadir</button>
+                </div>
+            </form>
+        </section>
+        
+        <section>
+            <div class="table-container">
+                <table id="miTabla" class="table table-striped table-responsive">
+                    <thead>
+                        <tr>
+                            <th>Escuela</th>
+                            <th>Dirección</th>
+                            <th>Localidad</th>
+                            <th>Acciones</th>
+                            <th>---</th>
+                        </tr>
+                    </thead>
+                    <tbody id="sedes-body">
+                        <!-- Filas generadas dinámicamente con JavaScript -->
+                    </tbody>
+                </table>
+                <div class="pagination">
+                    <div class="records-count">Registros: <span id="totalRegistros">0</span></div>
+                </div>
+            </div>
+        </section>
+        
+
+    </main>
+    
+
+    <footer>
+        <div class="footer">
+            <div class="footer-content">
+                <img src="../assets/union-logo.png" alt="Logo Unión Mediterránea de Taekwondo" class="footer-logo">
+                <div class="footer-icons-container">
+                    <div class="icon-arrow">
+                        <a href="#"><i class="fa-solid fa-arrow-up"></i></a>
+                    </div>
+                    <div class="footer-icons">
+                        <a target="_blank" href="https://www.facebook.com/p/Union-Mediterranea-de-Taekwondo-100063475813834/"><i class="fa-brands fa-facebook"></i></a>
+                        <a target="_blank" href="https://www.instagram.com/union_mediterranea/"><i class="fa-brands fa-instagram"></i></a>
+                        <a target="_blank" href="#"><i class="fa-brands fa-youtube"></i></a>
+                        <a target="_blank" href="https://wa.me/3517014308"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                    <a href="mailto:supportunion@gmail.com" class="footer-email">supportunion@gmail.com</a>
+                </div>
+                <div class="footer-right">
+                    <img src="../assets/fetra-logo.png" alt="Logo Federación Taekwondo" class="footer-logo">
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>UNION MEDITERRANEA DE TAEKWONDO 2024</p>
+        </div>
+    </footer>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/jwt-decode/build/jwt-decode.min.js"></script>
+    <script src="../controllers/public/menu.js"></script>
+    <script src="../controllers/controllers-publicaciones/manejo-modales.js"></script>
+    
+    
+    <script>
+
+        // Variables globales para manejar la acción actual y el ID actual
+        let currentAction = null;
+        let currentId = null;
+        let idEscuela = null; // Variable para almacenar el ID de la escuela si existe
+        
+
+        function submitForm() {
+    const token = localStorage.getItem('authToken');
+    if (!token) {
+        redirectToLogin('Token no encontrado.');
+        return;
+    }
+
+    const { dni } = jwt_decode(token);
+
+    const nombre = document.getElementById('titulo').value;
+    const email = document.getElementById('descripcion').value;
+    const telefono = document.getElementById('telefono').value;
+    const enlace = document.getElementById('enlaceInstagram').value;
+
+    if (!nombre || !email || !telefono || !enlace) {
+        showAlert('aviso', 'Debe completar los campos obligatorios(*).');
+        return;
+    }
+
+    // Data para enviar en el POST/PUT
+    const data = {
+        nombre,
+        dni_instructor: dni,
+        email,
+        telefono,
+        enlace,
+    };
+
+    if (idEscuela) {
+        updateSchool(data);
+    } else {
+        createSchool(data);
+    }
+}
+
+async function createSchool(data) {
+    const token = localStorage.getItem('authToken');
+    try {
+        const response = await fetch(`http://localhost:3000/escuelas`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify(data)
+        });
+
+        const responseData = await response.text();
+
+        if (!response.ok) {
+            showAlert('error', 'Error al crear la escuela.');
+            return;
+        }else{
+            showAlert('success', 'Escuela creada con éxito.');
+        }
+
+        let jsonData = null;
+        try {
+            jsonData = JSON.parse(responseData);
+        } catch (e) {
+            console.warn('La respuesta no es un JSON válido, manejando como texto:', responseData);
+        }
+
+        if (jsonData && jsonData.message) {
+            idEscuela = jsonData.id_escuela; // Asigna el ID de la escuela
+            uploadLogo(idEscuela); // Llama a la función para cargar el logo opcional
+        } else {
+            showAlert('aviso', 'Operación realizada ' + responseData);
+            cargarSedes();
+        }
+
+    } catch (error) {
+        console.error('Error al crear la escuela:', error);
+    }
+}
+
+async function updateSchool(data) {
+    try {
+        const token = localStorage.getItem('authToken');
+        const response = await fetch(`http://localhost:3000/escuelas/${idEscuela}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify(data)
+        });
+
+        const responseData = await response.text();
+
+        if (!response.ok) {
+            showAlert('error', 'Error al actualizar la escuela.');
+            return;
+        }else{
+            showAlert('success', 'Escuela actualizada con éxito.');
+        }
+        
+        // Después de mostrar el mensaje de éxito, carga el logo opcional.
+        uploadLogo(idEscuela); // Llama a la función para cargar el logo opcionalmente
+
+    } catch (error) {
+        console.error('Error al actualizar la escuela:', error);
+    }
+}
+
+async function uploadLogo(idEscuela) {
+    const logoInput = document.getElementById('imagen');
+    if (logoInput.files.length > 0) {
+        const logoFormData = new FormData();
+        const token = localStorage.getItem('authToken');
+        logoFormData.append('logo', logoInput.files[0]);
+        try {
+            const logoResponse = await fetch(`http://localhost:3000/escuelas/${idEscuela}/cargaLogo`, {
+                method: 'POST',
+                body: logoFormData,
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            if (logoResponse.ok) {
+                showAlert('success', 'Logo cargado con éxito.');
+            } else {
+                const logoResponseText = await logoResponse.text();
+                console.error('Error al cargar el logo: ' + logoResponseText);
+            }
+        } catch (error) {
+            console.error('Error al cargar el logo:', error);
+        }    
+    }
+      // Llama a cargar las sedes solo después de que el logo se haya manejado.
+      if (idEscuela) {
+        cargarSedes();
+    }
+}
+
+
+
+    
+        document.addEventListener('DOMContentLoaded', () => {
+            const token = localStorage.getItem('authToken');
+            if (!token) {
+                redirectToLogin('Token no encontrado.');
+                return;
+            }
+    
+            const { dni: idInstructor } = jwt_decode(token);
+    
+            async function cargarDatosEscuela() {
+                try {
+                    const response = await fetch(`http://localhost:3000/escuelas/instructor/${idInstructor}`, {
+                        method: 'GET',
+                        headers: {
+                            'Authorization': `Bearer ${token}`
+                        }
+                    });
+    
+                    const responseText = await response.text(); // Cambia a text en lugar de json
+                    
+    
+                    if (!response.ok) {
+                        if (responseText.includes("No se encontraron escuelas para ese instructor.")) {
+                            document.getElementById('imagePreview').src = '../../Backend/uploads/defaultLogo.jpg';
+                            return;
+                        }
+                        throw new Error('Error al cargar los datos de la escuela: ' + response.statusText);
+                    }
+    
+                    const data = JSON.parse(responseText);
+                    
+                    if (Array.isArray(data) && data.length > 0) {
+                        const escuela = data[0];
+                        idEscuela = escuela.id_escuela; // Asigna el ID de la escuela
+                        cargarSedes();
+                        // Actualiza los campos del formulario si la escuela ya existe
+                        document.getElementById('titulo').value = escuela.nombre || '';
+                        document.getElementById('descripcion').value = escuela.email_escuela || '';
+                        document.getElementById('telefono').value = escuela.telefono_escuela || '';
+                        document.getElementById('enlaceInstagram').value = escuela.enlace || '';
+                        document.getElementById('imagePreview').src = '../../Backend/' + (escuela.logo_escuela || 'uploads/defaultLogo.jpg');
+                    }
+                
+                } catch (error) {
+                    console.error('Error al cargar datos de la escuela:', error);
+
+                }
+            }
+            
+            cargarDatosEscuela();
+        });
+    
+        document.getElementById('confirmActionButton').addEventListener('click', submitForm);
+    </script>
+    
+    
+    
+    
+   
+    
+    
+    
+
+    
+
+        
+
+    <script>
+        document.getElementById('add-sede-button').addEventListener('click', function() {
+    if (idEscuela !== null) {
+        const direccion = document.getElementById('direccion').value;
+        const provinciaId = document.getElementById('provincia').value;
+        const localidadId = document.getElementById('localidad').value;
+
+        if (direccion && descripcion && provinciaId && localidadId) {
+            const nuevaSede = {
+                id_escuela: idEscuela,
+                direccion: direccion,
+                localidad: {
+                    id: localidadId,
+                    nombre: document.getElementById('localidad').options[document.getElementById('localidad').selectedIndex].text,
+                    provincia: provinciaId,
+                },
+            };
+            const token = localStorage.getItem('authToken');
+            fetch('http://localhost:3000/sedes', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify(nuevaSede),
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Error al crear la sede');
+                }
+                if (response.status === 201 || response.status === 200) {
+                    return response.json().catch(() => null);
+                }
+                return null;
+            })
+            .then(data => {
+                showAlert('success', 'Sede creada con éxito.');
+                cargarSedes(); // Refrescar la lista de sedes en la tabla
+                location.reload();
+                // Limpiar los campos del formulario
+                document.getElementById('direccion').value = '';
+                document.getElementById('provincia').selectedIndex = 0;
+                document.getElementById('localidad').selectedIndex = 0;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showAlert('error', 'No se pudo crear la sede. Intenta nuevamente.');
+            });
+        } else {
+            showAlert('aviso', 'Debe completar los campos obligatorios(*).');
+        }
+    } else {
+        showAlert('error', 'Error intente de nuevo mas tarde.');
+    }
+});
+
+
+
+        
+
+        // Función para mostrar el modal de confirmación de eliminación
+        function confirmarEliminacion(id) {
+            currentAction = 'eliminar';
+            currentId = id;
+            openModal(confirmModal);
+        }
+        
+
+        
+
+        // Evento para confirmar la acción
+        document.getElementById('confirmActionButton').addEventListener('click', () => {
+            if (currentAction === 'eliminar') {
+                eliminarSede(currentId); // Llama a la función de eliminación con el ID actual
+            } else if (currentAction === 'actualizar') {
+                submitForm(); // Llama a la función de actualización si la acción es de actualización
+            }
+            currentAction = null; // Restablece la acción
+            currentId = null; // Restablece el ID
+        });
+
+        
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+    <script>
+        // Función para cargar las sedes dinámicamente desde el endpoint
+        function cargarSedes() {
+    const token = localStorage.getItem('authToken'); // Obtén el token desde localStorage
+
+    return new Promise((resolve, reject) => {
+        fetch('http://localhost:3000/sedes', {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`, // Agrega el token en los encabezados
+                'Content-Type': 'application/json' // Opcional, según la configuración del backend
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error al cargar las sedes');
+            }
+            return response.json();
+        })
+        .then(sedes => {
+            // Filtrar sedes para mostrar solo las que coinciden con idEscuela
+            const sedesFiltradas = sedes.filter(sede => sede.id_escuela === idEscuela);
+            
+            // Mostrar las sedes filtradas en la tabla
+            mostrarSedesEnTabla(sedesFiltradas);
+            mostrarTotalRegistros(sedesFiltradas.length);
+            resolve(); // Resolvemos la promesa al finalizar
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            showAlert('error', 'No se pudieron cargar las sedes.');
+            reject(error); // Rechazamos la promesa en caso de error
+        });
+    });
+}
+
+
+// Función para mostrar las sedes en la tabla
+function mostrarSedesEnTabla(sedes) {
+    const tbody = document.getElementById('sedes-body');
+    tbody.innerHTML = ''; // Limpiar el contenido anterior
+
+    sedes.forEach(sede => {
+        const row = document.createElement('tr');
+
+        row.innerHTML = `
+            <td>${sede.escuela}</td>
+            <td>${sede.direccion}</td>
+            <td>${sede.localidad}</td>
+            <td>
+                <i class="fa-solid fa-trash icon-delete" title="Eliminar publicación" onclick="confirmarEliminacion(${sede.id_sede})"></i>
+            </td>
+        `;
+        tbody.appendChild(row);
+    });
+}
+
+
+        
+
+        // Llamada inicial para cargar las sedes al cargar la página
+
+        // Función para eliminar la sede
+        async function eliminarSede(id) {
+            try {
+                const response = await fetch(`http://localhost:3000/sedes/${id}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('authToken')}`
+                    }
+                });
+
+                if (!response.ok) throw new Error('Error al eliminar la sede');
+
+                showAlert('success', 'Sede eliminada con éxito.');
+                cargarSedes(); // Recarga la lista de sedes
+            } catch (error) {
+                console.error('Error:', error);
+                showAlert('error', 'No se pudo eliminar la sede. Intenta nuevamente.');
+            }
+        }
+
+
+        
+    </script>
+
+
+    
+    <script>
+
+        // Función para mostrar el total de registros
+        function mostrarTotalRegistros(total) {
+            const totalRegistros = document.getElementById('totalRegistros');
+            totalRegistros.textContent = total;
+        }
+        // Función para cargar provincias desde el backend
+        async function cargarProvincias() {
+            try {
+                const response = await fetch('http://localhost:3000/georef');
+                if (!response.ok) throw new Error('Error al obtener las provincias');
+        
+                const provincias = await response.json();
+                const selectProvincia = document.getElementById('provincia');
+                selectProvincia.innerHTML = '<option value="">Seleccione</option>';
+        
+                provincias.forEach(provincia => {
+                    const option = document.createElement('option');
+                    option.value = provincia.id;
+                    option.textContent = provincia.nombre;
+                    selectProvincia.appendChild(option);
+                });
+        
+                // Evento para cargar localidades cuando se selecciona una provincia
+                selectProvincia.addEventListener('change', async (event) => {
+                    const provinciaId = event.target.value;
+                    if (provinciaId) await cargarLocalidades(provinciaId);
+                });
+        
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+        
+        // Función para cargar localidades de una provincia
+        async function cargarLocalidades(provinciaId) {
+            try {
+                const response = await fetch(`http://localhost:3000/georef/${provinciaId}`);
+                if (!response.ok) throw new Error('Error al obtener las localidades');
+        
+                const localidades = await response.json();
+                const selectLocalidad = document.getElementById('localidad');
+                selectLocalidad.innerHTML = '<option value="">Seleccione </option>';
+        
+                localidades.forEach(localidad => {
+                    const option = document.createElement('option');
+                    option.value = localidad.id;
+                    option.textContent = localidad.nombre;
+                    selectLocalidad.appendChild(option);
+                });
+        
+                // Inicializar Select2
+                $('#localidad').select2({
+                    placeholder: 'Seleccione ',
+                    allowClear: true
+                });
+        
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+        
+        
+        
+        // Cargar provincias al iniciar la página
+        document.addEventListener('DOMContentLoaded', cargarProvincias);
+
+        // Función para verificar el token y el rol del usuario
+    function verificarTokenYRol() {
+            const token = localStorage.getItem('authToken'); // Asegúrate de usar el nombre correcto
+
+            if (!token) {
+                // Si no hay token, redirigir al home
+                window.location.href = 'login.html'; // Cambia esto a la URL de tu página de inicio
+                return;
+            }
+
+            // Decodificar el JWT
+            const usuario = JSON.parse(atob(token.split('.')[1])); // Decodifica la parte payload del token
+
+            // Verificar si el usuario tiene el rol de administrador
+            if (usuario.rol !== 'Instructor'  && usuario.rol !== 'Administrador') {
+
+                // Si no es administrador, redirigir al home
+                localStorage.removeItem('authToken'); // Asegúrate de usar el nombre correcto
+                window.location.href = 'login.html'; // Cambia esto a la URL de tu página de inicio
+            } else if (!usuario.estado) {
+                // Si el usuario no está activo, redirigir a Mercado Pago
+                localStorage.removeItem('authToken'); // Asegúrate de usar el nombre correcto
+                window.location.href = 'cuotaimpaga.html'; // Redirige a la página de cobros
+            }
+        }
+
+        // Llamar a la función al cargar la página
+        document.addEventListener('DOMContentLoaded', verificarTokenYRol);
+        
+        
+        // Función para cerrar sesión
+        function cerrarSesion() {
+                    localStorage.removeItem('authToken'); // Elimina el token del local storage
+                    window.location.href = 'login.html'; // Cambia esto a la URL de tu página de inicio de sesión
+                }
+          
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+

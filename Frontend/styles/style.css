@@ -1,0 +1,727 @@
+  body {
+    margin: 0;
+    font-family: "Libre Baskerville", serif !important;
+    background-color: #D2D2D2;
+    color: #323232;
+    
+  }
+  .no-scroll {
+    overflow: hidden;
+    }
+  :root {
+    --gris: #63666B;
+    --negroOscuro: #323232;
+    --blanco: #D2D2D2;
+    --naranja: #f36b2b;
+  }
+
+/* Estilos para el carrousel */
+.title-carrousel {
+  color: #f36b2b;
+  font-size: 50px;
+}
+
+main{
+  text-align: center;
+  max-width: 1200px;
+  border-radius: 30px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+  margin: 50px auto;
+}
+.parrafo-carrousel {
+  color: #D2D2D2;
+  font-size: 20px;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  filter: invert(50%) sepia(50%) saturate(600%) hue-rotate(-30deg) brightness(90%) contrast(200%) !important;
+}
+
+.carousel-indicators [data-bs-target],
+.carousel-indicators .active {
+  background-color: #f36b2b !important;
+}
+
+.carousel-item {
+  height: 100%;
+}
+
+#carouselExampleDark {
+  background-color: black;
+}
+
+.carousel-image {
+  object-fit: cover;
+  height: 500px;
+  opacity: 0.3;
+}
+
+.carousel-caption {
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  position: absolute;
+  right: 15%;
+  bottom: 1.25rem;
+  left: 15%;
+  padding-top: 45.25rem;
+  padding-bottom: 10.25rem;
+  text-align: center;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.5));
+}
+
+/* Estilos para la sección de contadores */
+
+.contadores {
+  display: flex;
+  justify-content: center; /* Centra los elementos horizontalmente */
+  align-items: center; /* Centra los elementos verticalmente */
+  flex-wrap: wrap; /* Permite que los elementos se envuelvan en varias líneas si es necesario */
+  gap: 50px; /* Espacio entre los elementos */
+  margin: 50px;
+}
+
+.logo img {
+  width: 500px;
+}
+
+.contador-container {
+  display: flex;
+  gap: 20px; /* Espacio entre los contadores */
+}
+
+.contador {
+  background-color: #333;
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  width: 250px; /* Ancho fijo para garantizar que todos los contadores tengan el mismo tamaño */
+  flex: 1; /* Permite que los contadores se distribuyan uniformemente */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.contador h2 {
+  margin: 0;
+  font-size: 25px;
+}
+
+.contador p {
+  font-size: 2em;
+  color: #f36b2b;
+  margin: 5px 0 0 0;
+}
+
+
+
+.section-info{
+  margin: 50px 0;
+  padding: 100px;
+  background-color: #323232;
+}
+
+.traekwondo-info{
+  margin: 50px 20px;
+  padding: 100px;
+  
+}
+
+.container-info-tkd{
+  display: flex;
+  margin: auto;
+}
+.container-info-tkd p{
+  margin: auto 30px;
+  color: #323232;
+
+}
+
+.cont-img{
+  width: 1000px;
+  max-width: 1000px;
+  min-width: 150px;
+  margin: auto;
+}
+
+.container-info-tkd img{
+  width: 100%;
+  
+}
+
+.container-info-tkd b{
+  font-size: x-large;
+  color: #323232;
+}
+.section-info b{
+  color: #f36b2b;
+  font-size: x-large;
+}
+.section-info, p{
+  color: #D2D2D2;
+  font-size: smaller;
+}
+
+.slider-calendario{
+  text-align: center;
+  
+  
+}
+.slider-calendario img{
+  width: 100%;
+  height: 550px;
+  overflow: hidden; 
+  object-fit: cover; 
+}
+
+.slider-calendario button {
+  margin: 150px; /* Ajusta el margen para tamaños más pequeños */
+  padding: 20px 50px; /* Reduce el padding para tamaños más pequeños */
+  border-radius: 25px;
+  background-color: #323232;
+  color: #f36b2b;
+  font-size: 2em; /* Ajusta el tamaño de fuente */
+  transition: all 0.3s ease; /* Transición para un efecto más suave */
+}
+
+.slider-calendario button i {
+  font-size: 1.5em; /* Tamaño de ícono responsivo */
+  margin-right: 15px;
+}
+
+.sedes{
+  min-height: 700px;
+  
+}
+
+.container-encabezado-sedes{
+  background-color: #323232;
+  color: #D2D2D2;
+  padding: 50px;
+  text-align: center;
+  margin: 0 !important;
+  
+}
+
+
+.container-encabezado-sedes h2{
+  font-size: 40px;
+}
+
+.buscar-sedes-container{
+  display: flex;
+  justify-content: center;
+  margin: 50px;
+  
+}
+.custom-select {
+  width: 100%;
+  padding: 16px;
+  background-color: #D2D2D2;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  color: #323232;
+}
+
+.button-buscar-sedes {
+  background-color: #d65f2f;
+  color: white;
+  padding: 15px 50px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  text-align: center;
+  display: block;
+  margin-left: 10px !important;
+  margin-bottom: 20px !important;
+}
+
+
+
+.b-contadores{
+  color: #D2D2D2;
+}
+
+.container-sedes{
+  margin: 0px !important;
+}
+
+.container-sedes h1{
+  text-align: center;
+  margin: auto;
+  min-height: 600px;
+  opacity: 50%;
+  font-size: 80px;
+  align-content: center;
+
+}
+
+.card{
+  margin: auto;
+  max-width: 350px;
+  background-color:   #323232;
+  margin: 60px 0;
+}
+
+.card-title{
+  color: #f36b2b !important;
+}
+
+.container-title{
+  text-align: center;
+  background-color: #323232;
+  color: #D2D2D2;
+  padding: 100px;
+  
+}
+
+.container-title h2{
+  font-size: 50px;
+
+}
+.container-cards{
+  margin: 50px;
+}
+
+.card-img-top {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+}
+.alert {
+  display: none; /* Oculta las alertas por defecto */
+}
+
+/* Asegúrate de mostrar la alerta cuando tenga contenido */
+.alert.active {
+  display: block; /* Muestra la alerta cuando tenga la clase 'active' */
+}
+ /* Contenedor de alertas */
+ .alert-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Espacio entre las alertas */
+  z-index: 1000; /* Para asegurarse de que esté encima de otros elementos */
+  
+}
+
+/* Estilos para las alertas */
+.alert {
+  padding: 15px;
+  width: 450px;
+  border-right: 4px;
+  color: #fff;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+}
+.alert-aviso{
+  background-color: #f36b2b;
+  display: none;
+  color: #000;
+  
+}
+.alert-danger {
+  background-color: #bd2d2a;
+  display: none;
+}
+
+.alert-success {
+  background-color: #2c9900;
+  display: none;
+}       
+      
+.disabled {
+  opacity: 0.6;
+}
+
+
+
+.loader-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #323232;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  text-align: center;
+  align-content: center;
+  margin: auto;
+}
+
+.loader {
+  border: 16px solid #000000b6;
+  border-radius: 50%;
+  border-top: 16px solid #f36b2b;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+  text-align: center;
+  margin: auto;
+  align-content: center;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+/* Estilos responsivos */
+@media (max-width: 768px) {
+  main{
+    
+    max-width: none;
+    border-radius: none;
+    box-shadow: none;
+    margin: 0;
+  }
+  .logo img {
+    width: 250px;
+  }
+  .contadores{
+    gap: 10px;
+  }
+  .contador {
+    
+    padding: 10px;    
+    width: 120px; /* Ancho fijo para garantizar que todos los contadores tengan el mismo tamaño */
+    
+  }
+  .container-title h2{
+    font-size: 30px;
+  
+  }
+  .contador h2 {
+    font-size: 1rem;
+  }
+  .contador p {
+    font-size: 1.5rem;
+  }
+
+  .section-info{
+    margin: 25px 0;
+    padding: 50px;
+    
+  }
+  .section-info b{
+    font-size: small;
+  }
+  .container-info-tkd b{
+    font-size: small;
+  }
+  .section-info, p{
+   
+    font-size: x-small;
+  }
+  .traekwondo-info{
+    
+    padding: 0px;
+    
+  }
+  .container-encabezado-sedes h2{
+    font-size: 30px;
+  }
+
+
+  
+  .custom-select{
+    padding: 15px 20px;
+    margin-bottom: 20px;
+  }
+  
+  
+}
+
+@media (max-width: 550px){
+  .logo-itf{
+    display: none;
+  }
+  .container-info-tkd{
+    display: block;
+    
+  }
+  .cont-img{
+    width: 100%;
+    max-width: 400px;
+    min-width: 150px;
+    margin: auto;
+    text-align: center  ;
+  }
+  .container-info-tkd img{
+    width: 250px;
+   
+    
+  }
+  .container-info-tkd p{
+    margin: 25px;
+    
+  
+  }
+  .contador {
+    padding: 10px;
+    width: 90px;
+  }
+  .b-contadores {
+    font-size: 0.7rem;
+  }
+
+  .tarjeta-sede{
+    margin: 20px;
+  }
+  .buscar-sedes-selector{
+    width: 250px;
+  }
+  .mensaje-no-sedes {
+    font-size: 15px;
+    margin-top: 65px;
+  }
+}
+
+/* Estilos responsivos */
+@media (max-width: 1200px) {
+  .slider-calendario button {
+    margin: 100px;
+    padding: 20px 40px;
+    font-size: 1.8em;
+  }
+
+  .slider-calendario button i {
+    font-size: 1.4em;
+    margin-right: 12px;
+  }
+}
+
+@media (max-width: 992px) {
+  .slider-calendario button {
+    padding: 15px 30px;
+    font-size: 1.6em;
+  }
+
+  .slider-calendario button i {
+    font-size: 1.3em;
+    margin-right: 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .slider-calendario button {
+    padding: 10px 20px;
+    font-size: 1.4em;
+  }
+
+  .slider-calendario button i {
+    font-size: 1.2em;
+    margin-right: 8px;
+  }
+}
+
+@media (max-width: 576px) {
+  .slider-calendario button {
+    padding: 8px 16px;
+    font-size: 1.2em;
+  }
+
+  .slider-calendario button i {
+    font-size: 1em;
+    margin-right: 5px;
+  }
+}
+
+@media (max-width: 375px) {
+  .slider-calendario button {
+    padding: 5px 10px;
+    font-size: 1em;
+  }
+
+  .slider-calendario button i {
+    font-size: 0.9em;
+    margin-right: 3px;
+  }
+
+}
+
+/* Estilos personalizados del modal */
+.confirmacion-modal {
+  background-color: rgba(0, 0, 0, 0.6);
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  align-content: center;
+  margin: auto;
+  
+}
+
+.confirmacion-modal.show {
+  display: flex;
+}
+
+.modal-content-confirmacion {
+  background-color: #323232;
+  padding: 60px;
+  border-radius: 8px;
+  max-width: 500px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  animation: modalShow 0.3s ease;
+  align-content: center;
+  margin: auto;
+}
+.form-control{
+  width: 100%;
+  padding: 16px;
+  background-color: #D2D2D2;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+}
+.modal-header-confirmacion {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-header-confirmacion h5 {
+  margin: 0;
+  color: #D2D2D2;
+  margin-bottom: 60px;
+  font-size: 35px;
+}
+
+.btn-close-confirmacion {
+  background: none;
+  border: none;
+  font-size: 1.2em;
+  cursor: pointer;
+}
+
+@keyframes modalFadeIn {
+  from {
+      opacity: 0;
+      transform: translateY(-20px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+.modal-footer-confirmacion {
+  text-align: center;
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+}
+
+.modal-footer-confirmacion button {
+  margin-left: 10px;
+}
+.btn-cancelar{
+  background-color: #63666B;;
+  
+}
+.btn-confirmar{
+  
+  background-color: #f36b2b;
+  
+
+}
+.btn{
+  color: #D2D2D2;
+  padding: 15px 50px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  text-align: center;
+  display: block;
+}
+.btn-cancelar:hover{
+  background-color: #63666B;
+  color: #323232;
+  transform: scale(1.05); /* Efecto de aumento en el hover */
+  
+}
+.btn-confirmar:hover {
+  color: #D2D2D2;
+  background-color: #f36b2b;
+  transform: scale(1.05); /* Efecto de aumento en el hover */
+}
+body.modal-open {
+  overflow: hidden;
+}
+.vista-previa{
+  display: block;
+  width: 150px;
+  height: 140px;
+  margin-top: 10px;
+  margin: auto;
+}
+.contenedor-img{
+  background-color: #D2D2D2;
+}
+
+
+
+.container-encabezado-sedes {
+  text-align: center;
+}
+
+h2 {
+  margin-bottom: 20px; /* Espacio debajo del título */
+  font-size: 2em; /* Tamaño de fuente general */
+}
+
+.buscar-sedes-container {
+  display: flex; /* Flexbox para disposición de elementos */
+  flex-direction: column; /* Inicialmente en columna */
+  align-items: center; /* Centrado de los elementos */
+}
+
+.buscar-sedes-selector {
+  display: flex; /* Flexbox para los selectores */
+  flex-wrap: wrap; /* Permitir que los elementos se ajusten */
+  justify-content: center; /* Centrar los elementos */
+  gap: 10px; /* Espacio entre los selectores */
+}
+
+
+
+
+
+.button-buscar-sedes:hover {
+  background-color: #f36b2b; /* Color del botón al pasar el ratón */
+}
+
+/* Media query para pantallas mayores a 740px */
+@media (min-width: 740px) {
+  .buscar-sedes-container {
+      flex-direction: row; /* Disposición en fila para pantallas más grandes */
+  }
+  
+  .custom-select {
+    margin-bottom: 20px;
+    width: auto; /* Ancho automático para selectores en pantallas grandes */
+  }
+  
+  
+
+}
+
