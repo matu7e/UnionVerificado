@@ -1,13 +1,7 @@
-const app = require('../backend/src/app'); // Traemos la app de Express
-const express = require('express');
-const port = process.env.PORT || 3000;
+// Importamos la app de Express desde tu backend
+const app = require('../Backend/src/app'); // Ajusta la ruta si es necesario
 
-// Ruta de prueba
-app.get('/', (req, res) => {
-  res.send('¡Hola, mundo!');
-});
-
-// Exportar la función para que Vercel pueda invocarla
+// Exportamos la función handler para que Vercel pueda invocarla
 module.exports = (req, res) => {
-  app(req, res); // Usamos el app de Express para manejar la solicitud
+  app(req, res); // Delegamos las solicitudes a la app de Express
 };

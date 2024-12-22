@@ -1,34 +1,29 @@
-// El archivo que se encarga de configurar la aplicación y cargar las rutas.
-
+// app.js - Configuración de la aplicación y rutas
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const { connectToDatabase } = require('./config/bdHelper');
 
-const cintosRoutes = require('./routes/rutasCintos')
-const tutoresRoutes = require('./routes/rutasTutores');
-const escuelasRoutes = require('./routes/rutasEscuelas');
-const georefRoutes = require('./routes/rutasGeoref');
-const miembrosRoutes = require('./routes/rutasMiembros');
-const sedesRoutes = require('./routes/rutasSedes');
-const publicacionesRoutes = require('./routes/rutasPublicaciones');
-const pagosRoutes = require('./routes/rutasPagos');
+// Inicializar Express
 const app = express();
 
+// Conexión a la base de datos
 connectToDatabase();
 
+// Middleware
 app.use(express.json());
 app.use(cors());
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
+// Rutas
+app.use('/cintos', require('./routes/rutasCintos'));
+app.use('/tutores', require('./routes/rutasTutores'));
+app.use('/escuelas', require('./routes/rutasEscuelas'));
+app.use('/georef', require('./routes/rutasGeoref'));
+app.use('/miembros', require('./routes/rutasMiembros'));
+app.use('/sedes', require('./routes/rutasSedes'));
+app.use('/publicaciones', require('./routes/rutasPublicaciones'));
+app.use('/mercadopago', require('./routes/rutasPagos'));
 
-app.use('/cintos', cintosRoutes);
-app.use('/tutores', tutoresRoutes);
-app.use('/escuelas', escuelasRoutes);
-app.use('/georef', georefRoutes);
-app.use('/miembros', miembrosRoutes);
-app.use('/sedes', sedesRoutes);
-app.use('/publicaciones', publicacionesRoutes);
-app.use('/mercadopago', pagosRoutes);
-
+// Exportar la app
 module.exports = app;
