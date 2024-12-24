@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cambiar Contraseña</title>
+    <style>
+   /* Estilo general de la página */
+body {
+    margin: 0;
+    font-family: "Libre Baskerville", serif;
+    background-color: #323232;
+    color: #D2D2D2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Altura completa de la ventana */
+    padding: 20px; /* Asegura que haya espacio en los bordes */
+    box-sizing: border-box;
+}
+
+/* Título principal */
+h1 {
+    font-size: 2em;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #f36b2b;
+}
+main{
+    width: 100%;
+}
+/* Contenedor del formulario */
+form {
+    background-color: #63666B;
+    padding: 20px 30px; /* Más padding para espacio interno */
+    border-radius: 10px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    max-width: 400px; /* Ajusta el tamaño máximo del formulario */
+    margin: 0 auto; /* Centra horizontalmente */
+    box-sizing: border-box; /* Incluye el padding dentro del ancho */
+}
+
+/* Estilo de las etiquetas */
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 0.9em;
+    color: #D2D2D2;
+}
+
+/* Estilo de los campos de entrada */
+input[type="password"] {
+    width: 100%; /* Se ajusta al tamaño del formulario */
+    padding: 10px;
+    margin-bottom: 10px; /* Aumenta el margen entre los campos */
+    border: none;
+    border-radius: 5px;
+    background-color: #D2D2D2;
+    color: #323232;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
+    font-size: 1em;
+    box-sizing: border-box; /* Incluye el padding dentro del ancho */
+}
+
+input[type="password"]:focus {
+    outline: none;
+    background-color: #fff;
+    border: 2px solid #f36b2b;
+}
+
+/* Botón de envío */
+button[type="submit"] {
+    background-color: #f36b2b;
+    color: #fff;
+    border: none;
+    margin-top: 15px;
+    padding: 12px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    width: 100%;
+    font-size: 1em;
+}
+
+button[type="submit"]:hover {
+    background-color: #e15d25;
+}
+
+/* Asegura que no haya saltos inesperados */
+button, input {
+    display: block;
+}
+
+/* Media Queries para pantallas pequeñas */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 1.5em; /* Reducir tamaño del título en pantallas pequeñas */
+    }
+
+    form {
+        padding: 15px; /* Reducir el padding del formulario */
+        max-width: 90%; /* El formulario ocupa más espacio en pantallas pequeñas */
+    }
+
+    input[type="password"], button[type="submit"] {
+        font-size: 0.9em; /* Reducir tamaño de fuente en campos de entrada */
+    }
+}
+
+@media (max-width: 400px) {
+    h1 {
+        font-size: 1.2em; /* Reducir aún más el tamaño del título */
+    }
+
+    form {
+        padding: 10px; /* Más ajuste en el padding del formulario */
+        max-width: 95%; /* Hacer el formulario más flexible */
+    }
+}
+
+
+
+
+    </style>
+    <script>
+        async function cambiarContrasena(event) {
+            event.preventDefault();
+    
+            // Obtener el token de la URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const token = urlParams.get('token');
+    
+            if (!token) {
+                alert('El enlace no es válido o no incluye un token');
+                return;
+            }
+    
+            // Obtener las contraseñas del formulario
+            const nuevaContrasena = document.getElementById('nuevaContrasena').value;
+            const confirmarContrasena = document.getElementById('confirmarContrasena').value;
+
+            // Expresión regular para validar la contraseña
+            const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
+
+            // Validar si las contraseñas son iguales
+            if (nuevaContrasena !== confirmarContrasena) {
+                alert('Las contraseñas no coinciden');
+                return;
+            }
+
+            // Validar la nueva contraseña
+            if (!passwordPattern.test(nuevaContrasena)) {
+                alert('La contraseña debe tener al menos 8 caracteres, incluir letras, números y un símbolo especial.');
+                return;
+            }
+
+            try {
+                // Realizar el POST al backend para cambiar la contraseña
+                const response = await fetch('http://localhost:3000/miembros/cambiarPassw', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ token, nuevaContrasena })
+                });
+    
+                if (!response.ok) {
+                    const error = await response.text();
+                    throw new Error(error);
+                }
+    
+                alert('Contraseña actualizada correctamente');
+                window.location.href = '/Frontend/src/login.html'; // Redirige a la página de inicio de sesión
+            } catch (error) {
+                console.error(error);
+                alert('Error al cambiar la contraseña: ' + error.message);
+            }
+        }
+    </script>
+</head>
+<body>
+    <main>
+        <h1>Cambiar Contraseña</h1>
+    <form onsubmit="cambiarContrasena(event)">
+        <label for="nuevaContrasena">Nueva Contraseña:</label>
+        <input type="password" id="nuevaContrasena" required minlength="8" />
+        <br>
+        <label for="confirmarContrasena">Confirmar Contraseña:</label>
+        <input type="password" id="confirmarContrasena" required minlength="8" />
+        <br>
+        <button type="submit">Actualizar Contraseña</button>
+    </form>
+    </main>
+</body>
+</html>

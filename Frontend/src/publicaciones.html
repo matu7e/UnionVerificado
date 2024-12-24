@@ -1,0 +1,639 @@
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <title>Unión Mediterránea - Taekwondo IFT</title>
+        <link rel="shortcut icon" href="../assets/union.ico" type="image/x-icon">
+        <link rel="stylesheet" href="../styles/footer.css">
+        <link rel="stylesheet" href="../styles/menu.css">
+        
+        
+
+        <style>
+        
+    .loader-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #323232;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  text-align: center;
+  align-content: center;
+  margin: auto;
+}
+
+.loader {
+  border: 16px solid #000000b6;
+  border-radius: 50%;
+  border-top: 16px solid #f36b2b;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+  text-align: center;
+  margin: auto;
+  align-content: center;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+    /* General */
+    body {
+        margin: 0 !important;
+        font-family: "Libre Baskerville", serif !important;
+        background-color: #D2D2D2 !important;
+        color: #323232 !important;
+        overflow-x: hidden !important;
+    }
+
+    :root {
+        --gris: #63666B;
+        --negroOscuro: #323232;
+        --blanco: #D2D2D2;
+        --naranja: #f36b2b;
+    }
+
+    /* Contenedor principal */
+    main {
+        
+        margin: 0 auto !important;
+        padding: 20px !important;
+        border-radius: none !important;
+        box-shadow: none !important;
+    }
+
+    /* Contenedor de publicaciones */
+    #publicaciones-container {
+        display: flex !important; /* Cambiado de grid a flex para una sola columna */
+        flex-direction: column !important; /* Asegura que las tarjetas estén una debajo de la otra */
+        gap: 20px !important; /* Espaciado entre tarjetas */
+    }
+
+    /* Tarjeta */
+    .card {
+        background-color: #fff !important;
+        border: 1px solid var(--gris) !important;
+        border-radius: 8px !important;
+        overflow: hidden !important;
+        transition: box-shadow 0.3s ease !important;
+        width: 100% !important;
+        
+        min-width: 300px; /* Ancho mínimo de 300px para la tarjeta */
+        margin: 0 auto; /* Centra la tarjeta */
+    }
+
+    .card:hover {
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2) !important;
+    }
+
+    .card-header {
+        background-color: var(--gris) !important;
+        color: var(--blanco) !important;
+        font-size: 1.5rem !important; /* Aumentar el tamaño de la fuente */
+        padding: 15px !important;
+        text-align: center !important;
+    }
+
+    .card-body {
+        padding: 30px !important;
+        flex-grow: 1 !important; /* Permite que el cuerpo crezca */
+        overflow: hidden !important; /* Elimina el scroll */
+        text-align: center; /* Centra el contenido del cuerpo */
+    }
+
+    .card-text {
+        color: var(--negroOscuro) !important;
+        text-align: initial; /* Alineación inicial del texto */
+        margin-bottom: 20px; /* Margen inferior entre el texto y la imagen */
+    }
+
+    .text-muted {
+        text-align: end;
+    }
+
+    .card-img-top {
+        max-width: 600px !important; /* Máximo ancho de 600px para la imagen */
+        height: auto !important;
+        border-bottom: 1px solid var(--gris) !important;
+        margin: 20px auto; /* Centra la imagen horizontalmente y agrega margen superior */
+    }
+
+    /* Fecha de publicación */
+    .card-footer {
+        display: flex !important;
+        justify-content: center !important; /* Centra todos los elementos en el pie de la tarjeta */
+        padding: 10px 20px !important;
+        border-top: 1px solid var(--gris) !important;
+    }
+
+    /* Botón primario */
+    .btn-primary {
+        background-color: var(--naranja) !important;
+        border: none !important;
+        color: var(--blanco) !important;
+        padding: 10px 0 !important; /* Ajustar el padding para centrar el texto verticalmente */
+        margin: 20px auto 0 !important; /* Margen superior para separar del contenido anterior */
+        border-radius: 5px !important;
+        transition: background-color 0.3s !important;
+        display: block; /* Asegura que el botón sea un bloque */
+        width: 250px; /* Ancho fijo de 150px para el botón */
+        text-align: center; /* Centra el texto en el botón */
+    }
+
+    .btn-primary:hover {
+        background-color: #d35a24 !important;
+    }
+
+    /* Responsive */
+    @media (min-width: 768px) {
+        #publicaciones-container {
+            flex-direction: column !important; /* Mantiene el diseño en columna */
+        }
+       
+    }
+    @media (max-width: 550px) {
+        .navbar-logo-U {
+            display: block;
+            height: 23%;
+            margin-top: 10px;
+        }
+    }
+    /* Botones generales */
+    .btn-primary {
+        font-family: inherit !important;
+        cursor: pointer !important;
+        padding: 8px 16px !important;
+        border: none !important;
+        border-radius: 4px !important;
+        background-color: var(--naranja) !important;
+        transition: background-color 0.3s !important;
+        min-width: 120px; /* Ancho mínimo para los botones */
+        max-width: 150px; /* Ancho máximo para los botones */
+    }
+
+    button:hover {
+        
+        transform: scale(1.05);
+    }
+
+    /* Estilos específicos para los botones de paginación */
+    #btn-anterior,
+    #btn-siguiente {
+        margin: 0 10px; /* Margen entre los botones */
+        margin: 0 5px;
+    background-color: #323232;
+    color: var(--blanco);
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+    }
+
+   .footer{
+    margin-top: 250px;
+   }
+
+    /* Estilos para los botones de paginación */
+.btn-pagina {
+    margin: 0 5px;
+    background-color: none;
+    color:var(--negroOscuro);
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.btn-pagina:hover {
+    background-color: #d35a24;
+    color: white !important; /* Texto blanco para contraste */
+}
+
+/* Estilo para la página activa */
+.btn-pagina.activo {
+    background-color: #d35a24 !important; /* Color verde para la página activa */
+    color: white !important; /* Texto blanco para contraste */
+}
+    /* Contenedor de alertas */
+    .alert-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Espacio entre las alertas */
+  z-index: 1000; /* Para asegurarse de que esté encima de otros elementos */
+  
+}
+
+/* Estilos para las alertas */
+.alert {
+  padding: 15px;
+  width: 450px;
+  border-right: 4px;
+  color: #fff;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+}
+.alert-aviso{
+  background-color: #f36b2b;
+  display: none;
+  color: #000;
+  
+}
+.alert-danger {
+  background-color: #bd2d2a;
+  display: none;
+}
+
+.alert-success {
+  background-color: #2c9900;
+  display: none;
+}       
+      
+.disabled {
+  opacity: 0.6;
+}
+        </style>
+        
+        
+        
+        
+        
+    </head>
+    <body>
+        
+        
+
+        <header class="navbar">
+            <div class="navbar-left">
+                <a href="../Index.html">
+                    <img src="../assets/log4.png" alt="Logo" class="navbar-logo"> <!-- Reemplaza con la ruta de tu logo -->
+                    <h1 class="navbar-title">UNION MEDITERRANEA</h1>
+                </a>
+                
+            </div>
+            <nav class="navbar-menu2" id="navbar-menu">
+                
+            </nav>
+            <i class="fas fa-bars hamburger" id="hamburger"></i> <!-- Ícono de hamburguesa -->
+        </header>
+        <div class="alert-container">
+            <div id="alert-aviso" class="alert alert-aviso">            
+            </div>
+            <div id="alert-success" class="alert alert-success">            
+            </div>
+            <div id="alert-error" class="alert alert-danger">
+            </div>
+        </div>
+        <!-- Loader -->
+        <div id="loader" class="loader-container">
+            <div class="loader"></div>
+        </div>
+        <main>
+            <div id="publicaciones-container" class="container mt-5"></div>
+            <div id="paginador" class="d-flex justify-content-between align-items-center mt-3">
+                <button id="btn-anterior" class="btn btn-secondary" disabled>Anterior</button>
+                
+                <div id="numeros-paginas" class="mx-3"></div> <!-- Contenedor para los números de página -->
+                
+                <button id="btn-siguiente" class="btn btn-secondary">Siguiente</button>
+            </div>
+        </main>
+        
+        
+        <footer>
+            <div class="footer">
+                <div class="footer-content">
+                    <img src="../assets/union-logo.png" alt="Logo Unión Mediterránea de Taekwondo" class="footer-logo">
+                
+                    <div class="footer-icons-container">
+                    <div class="icon-arrow">
+                        <a href="#"><i class="fa-solid fa-arrow-up"></i></a>
+                    </div>
+                    <div class="footer-icons">
+                        <a target="_blank" href="https://www.facebook.com/p/Union-Mediterranea-de-Taekwondo-100063475813834/"><i class="fa-brands fa-facebook"></i></a>
+                        <a target="_blank" href="https://www.instagram.com/union_mediterranea/"><i class="fa-brands fa-instagram"></i></a>
+                        <a target="_blank" href="#"><i class="fa-brands fa-youtube"></i></a>
+                        <a target="_blank" href="https://wa.me/3517014308"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                    <a href="mailto:supportunion@gmail.com" class="footer-email">supportunion@gmail.com</a>
+                    </div>
+                
+                    <div class="footer-right">
+                    <img src="../assets/fetra-logo.png" alt="Logo Federación Taekwondo" class="footer-logo">
+                    </div>
+                </div>
+            </div>
+            
+
+            <div class="footer-bottom">
+            <p>UNION MEDITERRANEA DE TAEKWONDO 2024</p>   
+            </div>
+        </footer> 
+            <script src="https://cdn.jsdelivr.net/npm/jwt-decode/build/jwt-decode.min.js"></script>
+            
+            
+            <script src="../controllers/public/menu.js"></script>
+            
+            <script>
+                const API_BASE_URL = 'http://localhost:3000';
+            
+                document.addEventListener('DOMContentLoaded', function() {
+                    const loader = document.getElementById('loader');
+                    loader.style.display = 'block'; // Mostrar el loader
+            
+                    const token = localStorage.getItem('authToken');
+                    if (!token) {
+                        redirectToLogin('Token no encontrado.');
+                        return;
+                    }
+            
+                    try {
+                        const { dni, estado: userStatus, rol } = jwt_decode(token);
+                        if (!userStatus) {
+                            redirectToPayment();
+                            return;
+                        }
+            
+                        // Aquí no necesitamos hacer fetchUserData
+                        handleUserData({ dni, estado: userStatus, rol }, token, rol);
+                        cargarPublicaciones(); // Cargar publicaciones una vez que el usuario está autenticado
+            
+                        // Ocultar el loader después de 5 segundos
+                        setTimeout(() => {
+                            hideLoader();
+                        }, 1500); // 5000 milisegundos = 5 segundos
+            
+                    } catch (error) {
+                        console.error('Error al decodificar el token:', error);
+                        hideLoader(); // Ocultar el loader en caso de error
+                    }
+                });
+            
+                // Función para ocultar el loader
+                function hideLoader() {
+                    const loader = document.getElementById('loader');
+                    loader.style.display = 'none'; // Ocultar el loader
+                }
+            
+                // Manejo de datos de usuario
+                function handleUserData(data, token, rol) {
+                    if (!data.estado) { // Cambiar esto si "estado" es la propiedad que indica si el usuario está activo
+                        showAlert('error', 'Usuario Inactivo');
+                        redirectToLogin('Usuario inactivo.');
+                        return;
+                    }
+            
+                    construirMenu(rol);
+                }
+            
+                // Función para construir el menú
+                function construirMenu(rol) {
+                    const navbarMenu = document.getElementById('navbar-menu');
+                    navbarMenu.innerHTML = ''; // Limpiar el menú actual
+            
+                    const logoU = '<img src="../assets/log1.png" alt="Logo" class="navbar-logo-U">'; // Logo para el menú
+                    navbarMenu.innerHTML += logoU; // Agregar logo al menú
+            
+                    navbarMenu.innerHTML += `
+                        <li><a id="actual" href="publicaciones.html">Publicaciones</a></li>
+                    `;
+            
+                    if (rol === 'Instructor' || rol === 'Administrador') {
+                        navbarMenu.innerHTML += `
+                            <li><a href="ABM_alumnos.html">Mis alumnos</a></li>
+                            <li><a href="ABM_escuelas.html">Mi escuela</a></li>
+                        `;
+                    }
+                    navbarMenu.innerHTML += `
+                        <li><a href="mi-perfil.html">Mi perfil</a></li>
+                    `;
+            
+                    navbarMenu.innerHTML += `
+                        <li><a href="#" id="logoutButton" class="login-btn">Cerrar sesión</a></li>
+                    `;
+            
+                    // Agregar el evento de cierre de sesión
+                    document.getElementById('logoutButton').addEventListener('click', function(event) {
+                        event.preventDefault();
+                        cerrarSesion();
+                    });
+                }
+            
+                // Función para cerrar sesión
+                function cerrarSesion() {
+                    localStorage.removeItem('authToken'); // Elimina el token del local storage
+                    window.location.href = 'login.html'; // Cambia esto a la URL de tu página de inicio de sesión
+                }
+
+            
+                // Redirecciones y configuración
+                function redirectToLogin(message) {
+                    console.error(message);
+                    window.location.href = '../src/login.html';
+                }
+            
+                function redirectToPayment() {
+                    window.location.href = 'https://www.mercadopago.com.ar/...';
+                }
+            
+                // Paginación de publicaciones
+                const publicacionesPorPagina = 2;
+                let paginaActual = 1;
+                let totalPublicaciones = 0;
+                let publicaciones = [];
+            
+                // Función para cargar las publicaciones
+                async function cargarPublicaciones() {
+                    const contenedor = document.getElementById("publicaciones-container");
+                    const token = localStorage.getItem('authToken'); // Obtén el token desde localStorage
+
+                    try {
+                        const response = await fetch(`${API_BASE_URL}/publicaciones`, {
+                            method: 'GET',
+                            headers: {
+                                'Authorization': `Bearer ${token}`// Agrega el token en los encabezados
+                                
+                            }
+                        });
+
+                        if (!response.ok) {
+                            console.error("Error al obtener publicaciones");
+                            return;
+                        }
+
+                        publicaciones = await response.json();
+                        totalPublicaciones = publicaciones.length;
+
+                        // Mostrar las publicaciones de la página actual
+                        mostrarPublicaciones();
+                        mostrarNumerosPaginas(); // Mostrar los números de las páginas
+                    } catch (error) {
+                        console.error("Error al cargar las publicaciones:", error);
+                    }
+                }
+
+            
+                // Función para mostrar las publicaciones de la página actual
+                function mostrarPublicaciones() {
+                    const contenedor = document.getElementById("publicaciones-container");
+                    contenedor.innerHTML = "";
+            
+                    const inicio = (paginaActual - 1) * publicacionesPorPagina;
+                    const fin = Math.min(inicio + publicacionesPorPagina, totalPublicaciones);
+                    
+                    // Ordenar las publicaciones de forma descendente por fecha
+                    const publicacionesPagina = publicaciones
+                        .sort((a, b) => new Date(b.fecha_publicacion) - new Date(a.fecha_publicacion))
+                        .slice(inicio, fin);
+            
+                    publicacionesPagina.forEach((publicacion) => {
+                        const publicacionElement = document.createElement("div");
+                        publicacionElement.classList.add("card", "mb-3");
+            
+                        // Título
+                        const titulo = document.createElement("h5");
+                        titulo.classList.add("card-header");
+                        titulo.innerText = publicacion.titulo;
+                        publicacionElement.appendChild(titulo);
+            
+                        // Cuerpo de la tarjeta
+                        const cuerpo = document.createElement("div");
+                        cuerpo.classList.add("card-body");
+            
+                        // Descripción
+                        if (publicacion.descripcion) {
+                            const descripcion = document.createElement("p");
+                            descripcion.classList.add("card-text");
+                            descripcion.innerText = publicacion.descripcion;
+                            cuerpo.appendChild(descripcion);
+                        }
+            
+                        // Imagen
+                        if (publicacion.imagen) {
+                            const imagen = document.createElement("img");
+                            imagen.src = `../../Backend/${publicacion.imagen}`;
+                            imagen.alt = publicacion.titulo;
+                            imagen.classList.add("card-img-top", "mb-3");
+                            cuerpo.appendChild(imagen);
+                        }
+            
+                        // Enlace
+                        if (publicacion.enlace) {
+                            const enlace = document.createElement("a");
+                            enlace.href = publicacion.enlace;
+                            enlace.innerText = "Ver más";
+                            enlace.classList.add("btn", "btn-primary", "mt-2");
+                            cuerpo.appendChild(enlace);
+                        }
+            
+                        // Fecha
+                        const fecha = document.createElement("p");
+                        fecha.classList.add("text-muted", "mt-2");
+                        fecha.style.fontSize = "0.9em";
+                        fecha.innerText = `Publicado el: ${new Date(publicacion.fecha_publicacion).toLocaleDateString()}`;
+                        cuerpo.appendChild(fecha);
+            
+                        // Añadir el cuerpo a la tarjeta
+                        publicacionElement.appendChild(cuerpo);
+                        contenedor.appendChild(publicacionElement);
+                    });
+            
+                    // Actualizar estado de los botones
+                    document.getElementById("btn-anterior").disabled = paginaActual === 1;
+                    document.getElementById("btn-siguiente").disabled = fin >= totalPublicaciones;
+                }
+            
+                // Función para mostrar los números de página como botones
+                function mostrarNumerosPaginas() {
+                    const contenedorPaginas = document.getElementById("numeros-paginas");
+                    contenedorPaginas.innerHTML = ""; // Limpiar el contenedor
+            
+                    const totalPaginas = Math.ceil(totalPublicaciones / publicacionesPorPagina);
+                    
+                    for (let i = 1; i <= totalPaginas; i++) {
+                        const botonPagina = document.createElement("button");
+                        botonPagina.classList.add("btn-pagina");
+                        botonPagina.innerText = i;
+                        
+                        // Agregar evento para cambiar de página
+                        botonPagina.onclick = () => {
+                            paginaActual = i; // Actualiza la página actual
+                            mostrarPublicaciones(); // Muestra las publicaciones de la nueva página
+                            mostrarNumerosPaginas(); // Actualiza los botones de paginación
+                        };
+                        
+                        // Si es la página actual, agregar la clase "activo"
+                        if (i === paginaActual) {
+                            botonPagina.classList.add("activo");
+                        }
+            
+                        contenedorPaginas.appendChild(botonPagina);
+                    }
+                }
+            
+                // Evento para el botón "Anterior"
+                document.getElementById("btn-anterior").addEventListener("click", () => {
+                    if (paginaActual > 1) {
+                        paginaActual--;
+                        mostrarPublicaciones();
+                        window.scrollTo(0, 0); // Desplazar hacia arriba
+                    }
+                });
+            
+                // Evento para el botón "Siguiente"
+                document.getElementById("btn-siguiente").addEventListener("click", () => {
+                    if (paginaActual < Math.ceil(totalPublicaciones / publicacionesPorPagina)) {
+                        paginaActual++;
+                        mostrarPublicaciones();
+                        window.scrollTo(0, 0); // Desplazar hacia arriba
+                    }
+                });
+
+                
+                // Función para verificar el token y el rol del usuario
+                function verificarTokenYRol() {
+                                const token = localStorage.getItem('authToken'); // Asegúrate de usar el nombre correcto
+
+                                if (!token) {
+                                    // Si no hay token, redirigir al home
+                                    window.location.href = 'login.html'; // Cambia esto a la URL de tu página de inicio
+                                    return;
+                                }
+
+                                // Decodificar el JWT
+                                const usuario = JSON.parse(atob(token.split('.')[1])); // Decodifica la parte payload del token
+
+                                // Verificar si el usuario tiene el rol de Instructor o Alumno
+                                if (usuario.rol !== 'Instructor' && usuario.rol !== 'Alumno' && usuario.rol !== 'Administrador') {
+                                    // Si no es Instructor ni Alumno, redirigir al home
+                                    localStorage.removeItem('authToken'); // Asegúrate de usar el nombre correcto
+                                    window.location.href = 'login.html'; // Cambia esto a la URL de tu página de inicio
+                                } else if (!usuario.estado) {
+                                    // Si el usuario no está activo, redirigir a Mercado Pago
+                                    localStorage.removeItem('authToken'); // Asegúrate de usar el nombre correcto
+                                    window.location.href = 'https://www.mercadopago.com.ar/'; // Cambia esto a la URL de Mercado Pago
+                                }
+                            }
+
+                    // Llamar a la función al cargar la página
+                    document.addEventListener('DOMContentLoaded', verificarTokenYRol);
+            </script>
+            
+            
+
+            
+        </body>
+        </html>
+        

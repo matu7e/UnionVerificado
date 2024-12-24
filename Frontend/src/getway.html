@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../../assets/union.ico" type="image/x-icon">
+    <title>Ingresando...</title>
+    
+    <style>
+        /* Estilos para la animación de "Ingresando" */
+        #loadingMessage {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 24px;
+            font-weight: bold;
+            color: #f36b2b;
+            animation: fadeInOut 3s ease-in-out;
+        }
+
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
+        body {
+            margin: 0;
+            font-family: "Libre Baskerville", serif !important;
+            background-color: #323232;            
+        }
+    </style>
+</head>
+<body>
+    <div id="loadingMessage">Ingresando...</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/jwt-decode/build/jwt-decode.min.js"></script>
+    <script>
+        function verificarTokenYRol() {
+            const token = localStorage.getItem('authToken');
+            const loadingMessage = document.getElementById('loadingMessage');
+
+            if (!token) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            // Mostrar mensaje de "Ingresando"
+            loadingMessage.style.display = 'block';
+
+            // Decodificar el JWT
+            const usuario = JSON.parse(atob(token.split('.')[1]));
+
+            setTimeout(() => {
+                // Verificar si el usuario tiene el rol de Administrador
+                if (usuario.rol === 'Administrador') {
+                    window.location.href = 'administrador/seleccionar_rol.html';
+                } else if (usuario.rol === 'Alumno' || usuario.rol === 'Instructor') {
+                    window.location.href = 'mi-perfil.html';
+                } else if (!usuario.estado) {
+                    // Si el usuario no está activo, redirigir a Mercado Pago
+                    localStorage.removeItem('authToken');
+                    window.location.href = 'cuotaimpaga.html'; // Redirige a la página de cobros
+                } else {
+                    // Si no tiene un rol válido, redirigir al login
+                    localStorage.removeItem('authToken');
+                    window.location.href = 'login.html';
+                }
+            }, 3000); // Espera de 3 segundos   
+        }
+
+        // Llamar a la función al cargar la página
+        document.addEventListener('DOMContentLoaded', verificarTokenYRol);
+    </script>
+</body>
+</html>
+
+    
